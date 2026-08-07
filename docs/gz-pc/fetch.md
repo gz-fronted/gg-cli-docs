@@ -1,6 +1,7 @@
 ---
 title: 请求与初始化
 order: 2
+toc: content
 ---
 
 # gzFetch

@@ -1,6 +1,7 @@
 ---
 title: gz-pc 概览
 order: 1
+toc: content
 ---
 
 # @gz-fronted/gz-pc

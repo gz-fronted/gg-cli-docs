@@ -1,6 +1,7 @@
 ---
 title: CLI 概览
 order: 1
+toc: content
 ---
 
 # gg-cli

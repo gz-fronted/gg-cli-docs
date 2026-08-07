@@ -19,9 +19,9 @@ export default function Hero() {
           </div>
 
           <h1>
-            <span>Build once.</span>
-            <br />
-            Ship <em>consistently.</em>
+            <span>一条命令</span>
+            <em>构建标准化</em>
+            <span>前端项目</span>
           </h1>
 
           <p>
@@ -31,10 +31,10 @@ export default function Hero() {
 
           <div className="gg-home-actions">
             <Link className="gg-home-action-primary" to="/getting-started">
-              开始创建项目 <span aria-hidden="true">↗</span>
+              快速上手 <span aria-hidden="true">↗</span>
             </Link>
-            <Link className="gg-home-action-secondary" to="/commands">
-              查看项目命令 <span aria-hidden="true">→</span>
+            <Link className="gg-home-action-secondary" to="/templates">
+              查看项目模板 <span aria-hidden="true">→</span>
             </Link>
           </div>
 

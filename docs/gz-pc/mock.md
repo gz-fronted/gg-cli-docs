@@ -1,6 +1,7 @@
 ---
 title: 与声明式 Mock 配合
 order: 5
+toc: content
 ---
 
 # gz-pc 与声明式 Mock

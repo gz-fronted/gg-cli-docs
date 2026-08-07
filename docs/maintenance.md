@@ -1,6 +1,7 @@
 ---
 title: 文档维护
 order: 2
+toc: content
 ---
 
 # 文档维护
@@ -40,3 +41,19 @@ order: 2
 4. 首页、导航、站内搜索和深层链接正常。
 5. `pnpm build` 成功。
 6. 公网与内网地址分别抽查。
+
+## 文档站部署
+
+本站使用同一代码库分别发布到公网与公司内网。公网可部署到 Vercel，内网将构建后的 `dist/` 交给静态资源服务器。
+
+```text
+Build Command: pnpm build
+Output Directory: dist
+```
+
+部署在二级路径时，通过 `DOCS_BASE` 设置资源前缀，并让静态服务将页面路由回退到 `index.html`。内外网都使用域名根路径时，可以复用同一份 `dist/`。
+
+| 资源 | 公网地址 | 内网地址 |
+| --- | --- | --- |
+| gg-cli 文档站 | Vercel 域名待创建 | 内网域名、端口和路由待提供 |
+| gg-ui 组件文档 | [https://gz-ui-cyan.vercel.app/](https://gz-ui-cyan.vercel.app/) | 待提供 |

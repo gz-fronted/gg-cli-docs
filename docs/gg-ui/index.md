@@ -1,6 +1,7 @@
 ---
 title: gg-ui 概览
 order: 1
+toc: content
 ---
 
 # @chenhui996/gg-ui
@@ -52,7 +53,7 @@ export default function App() {
 
 | 环境 | 地址 | 状态 |
 | --- | --- | --- |
-| 公网 | 待提供 | <span class="gz-status">发布前配置</span> |
+| 公网 | [https://gz-ui-cyan.vercel.app/](https://gz-ui-cyan.vercel.app/) | 可访问 |
 | 公司内网 | 待提供 | <span class="gz-status">发布前配置</span> |
 
-地址确定后只需要更新本页和[资源入口](/resources)，无需修改其他章节。
+内网地址确定后更新本页即可，无需修改其他章节。

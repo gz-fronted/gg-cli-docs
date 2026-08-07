@@ -37,8 +37,7 @@ export default defineConfig({
       switch: true,
     },
     nav: [
-      { title: '快速开始', link: '/getting-started' },
-      { title: '项目命令', link: '/commands' },
+      { title: '指南', link: '/getting-started' },
       { title: '项目模板', link: '/templates' },
       {
         title: '配套工具',
@@ -48,7 +47,6 @@ export default defineConfig({
         ],
       },
       { title: '常见问题', link: '/faq' },
-      { title: '部署', link: '/resources' },
     ],
     footer: 'gg-cli · 前端项目脚手架',
   },

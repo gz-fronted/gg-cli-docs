@@ -1,6 +1,7 @@
 ---
 title: 项目内规范
 order: 4
+toc: content
 ---
 
 # 项目内规范
@@ -22,4 +23,4 @@ order: 4
 - 只把与团队公共工程有关的能力放入 gz-pc 或 gg-ui，业务逻辑留在项目内。
 - 发现重复问题时补充项目文档，避免只依赖口头说明。
 
-本站帮助你理解 gg-cli、共享工具和通用开发路径；项目内文档负责约束具体实现。日常开发清单见[开发提示](/getting-started/development-guide)。
+本站帮助你理解 gg-cli、共享工具和通用开发路径；项目内文档负责约束具体实现。日常开发清单见[编码规范](/getting-started/coding-standards)。

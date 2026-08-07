@@ -1,6 +1,7 @@
 ---
 title: 模板概览
 order: 1
+toc: content
 ---
 
 # 项目模板

@@ -44,10 +44,181 @@ samp {
   letter-spacing: -0.04em;
 }
 
+.dumi-default-header-content {
+  max-width: none;
+  height: 72px;
+  padding-inline: 24px;
+}
+
+.dumi-default-header-left {
+  flex: 0 0 176px;
+  width: 176px;
+}
+
+.gg-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  min-width: max-content;
+  text-decoration: none;
+}
+
+.gg-brand-logo-company {
+  display: inline-flex;
+  align-items: center;
+  width: 128px;
+  height: 40px;
+}
+
+.gg-brand-logo-company img {
+  display: block;
+  width: 128px;
+  height: auto;
+}
+
+.dumi-default-navbar > li {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
 .dumi-default-navbar > li > a,
 .dumi-default-navbar > li > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
   font-weight: 560;
   font-size: 15px;
+  line-height: 1.2;
+}
+
+.dumi-default-navbar > li > .dumi-default-navbar-collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.dumi-default-navbar > li > .dumi-default-navbar-collapse-btn > svg {
+  display: block;
+  margin: 0;
+}
+
+.dumi-default-doc-layout:not(:has(.gg-home-hero)) {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.dumi-default-doc-layout:not(:has(.gg-home-hero)) > main {
+  gap: 28px;
+  max-width: 1480px;
+  padding: 32px;
+}
+
+.dumi-default-doc-layout:not(:has(.gg-home-hero)) .dumi-default-sidebar {
+  top: 72px;
+  width: 214px;
+  max-height: calc(100vh - 72px);
+  padding: 8px 14px 40px 0;
+}
+
+.dumi-default-sidebar > dl > dt {
+  margin: 18px 12px 8px;
+  color: #98a2b3;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.dumi-default-sidebar > dl > dd {
+  padding: 2px 0;
+}
+
+.dumi-default-sidebar > dl > dd > a {
+  position: relative;
+  padding: 8px 12px;
+  color: #667085;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 8px;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.dumi-default-sidebar > dl > dd > a:hover {
+  color: #2563eb;
+  background: rgb(37 99 235 / 5%);
+}
+
+.dumi-default-sidebar > dl > dd > a.active {
+  color: #2563eb;
+  font-weight: 650;
+  background: #eaf2ff;
+}
+
+.dumi-default-sidebar > dl > dd > a.active::before {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  width: 3px;
+  background: #2563eb;
+  border-radius: 0 3px 3px 0;
+  content: '';
+}
+
+.dumi-default-doc-layout:not(:has(.gg-home-hero)) > main > section {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eaecf0;
+  border-radius: 14px;
+  box-shadow: 0 12px 34px rgb(16 24 40 / 5%);
+}
+
+.dumi-default-doc-layout:not(:has(.gg-home-hero)) .dumi-default-content {
+  padding: 42px 52px 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.dumi-default-doc-layout-toc-wrapper {
+  top: 102px !important;
+  width: 190px !important;
+  margin-inline-start: 0 !important;
+  padding: 6px 0 28px 4px;
+}
+
+.dumi-default-doc-layout-toc-wrapper > h4 {
+  margin-bottom: 13px !important;
+  color: #98a2b3 !important;
+  font-size: 0 !important;
+  letter-spacing: 0.08em;
+}
+
+.dumi-default-doc-layout-toc-wrapper > h4::after {
+  font-size: 11px;
+  content: '本页目录';
+}
+
+.dumi-default-doc-layout-toc-wrapper ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dumi-default-doc-layout-toc-wrapper li {
+  margin: 7px 0;
+}
+
+.dumi-default-doc-layout-toc-wrapper a {
+  color: #7a8394;
+  font-size: 13px;
+  line-height: 1.55;
+  text-decoration: none;
+}
+
+.dumi-default-doc-layout-toc-wrapper a:hover,
+.dumi-default-doc-layout-toc-wrapper a.active {
+  color: #2563eb;
 }
 
 .dumi-default-doc-layout:has(.gg-home-hero) {
@@ -69,6 +240,10 @@ samp {
 
 .dumi-default-doc-layout:has(.gg-home-hero) .dumi-default-logo {
   color: #fff;
+}
+
+.dumi-default-doc-layout:has(.gg-home-hero) .gg-brand-logo-company {
+  filter: drop-shadow(0 5px 14px rgb(0 0 0 / 22%));
 }
 
 .dumi-default-doc-layout:has(.gg-home-hero) .dumi-default-navbar > li > a,
@@ -149,7 +324,7 @@ samp {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 38px;
   color: #8f98bb;
   font-weight: 700;
   font-size: 11px;
@@ -165,12 +340,15 @@ samp {
 }
 
 .gg-home-copy h1 {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.7vw, 11px);
   margin: 0;
   color: #f8f9ff;
   font-weight: 780;
-  font-size: clamp(58px, 5.3vw, 86px);
-  line-height: 0.98;
-  letter-spacing: -0.065em;
+  font-size: clamp(50px, 4.35vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
 }
 
 .gg-home-copy h1 span {
@@ -187,7 +365,7 @@ samp {
 
 .gg-home-copy > p {
   max-width: 590px;
-  margin: 30px 0 0;
+  margin: 38px 0 0;
   color: #969db8;
   font-size: clamp(16px, 1.3vw, 18px);
   line-height: 1.9;
@@ -201,6 +379,7 @@ samp {
 }
 
 .gg-home-actions a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -210,34 +389,54 @@ samp {
   font-weight: 650;
   font-size: 15px;
   text-decoration: none;
+  overflow: hidden;
   border-radius: 10px;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .gg-home-actions a:hover {
   transform: translateY(-2px);
 }
 
+.gg-home-actions a:focus-visible {
+  outline: 2px solid #a5b4fc;
+  outline-offset: 4px;
+}
+
 .gg-home-action-primary {
-  color: #070812;
-  background: #f3f5ff;
-  box-shadow: 0 18px 50px rgb(129 140 248 / 15%);
+  color: #fff;
+  background: linear-gradient(110deg, #2563eb 0%, #6366f1 52%, #8b5cf6 100%);
+  border: 1px solid rgb(165 180 252 / 38%);
+  box-shadow:
+    0 14px 36px rgb(79 70 229 / 35%),
+    inset 0 1px 0 rgb(255 255 255 / 25%);
 }
 
 .gg-home-action-primary:hover {
-  color: #070812;
-  box-shadow: 0 22px 60px rgb(129 140 248 / 26%);
+  color: #fff;
+  background: linear-gradient(110deg, #3b82f6 0%, #6366f1 48%, #a855f7 100%);
+  border-color: rgb(196 181 253 / 62%);
+  box-shadow:
+    0 18px 46px rgb(99 102 241 / 48%),
+    inset 0 1px 0 rgb(255 255 255 / 32%);
 }
 
 .gg-home-action-secondary {
-  color: #b7bdd5;
-  background: rgb(255 255 255 / 4%);
-  border: 1px solid rgb(255 255 255 / 11%);
+  color: #d8ddf2;
+  background: linear-gradient(120deg, rgb(59 130 246 / 13%), rgb(139 92 246 / 11%));
+  border: 1px solid rgb(129 140 248 / 32%);
+  box-shadow:
+    0 12px 30px rgb(15 23 42 / 28%),
+    inset 0 1px 0 rgb(255 255 255 / 7%);
 }
 
 .gg-home-action-secondary:hover {
   color: #fff;
-  border-color: rgb(129 140 248 / 55%);
+  background: linear-gradient(120deg, rgb(59 130 246 / 22%), rgb(139 92 246 / 18%));
+  border-color: rgb(129 140 248 / 62%);
+  box-shadow:
+    0 16px 38px rgb(49 46 129 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 12%);
 }
 
 .gg-home-stack {
@@ -532,17 +731,39 @@ samp {
 
 .markdown h1 {
   color: var(--gg-ink);
-  font-size: 38px;
+  margin-top: 0;
+  margin-bottom: 34px;
+  font-size: 36px;
   font-weight: 760;
-  line-height: 1.25;
+  line-height: 1.22;
 }
 
 .markdown h2 {
-  margin-top: 2.25em;
+  margin-top: 2.4em;
   padding-top: 0.2em;
   color: var(--gg-ink);
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 720;
+}
+
+.markdown h3 {
+  margin-top: 2em;
+  color: #253047;
+  font-size: 18px;
+}
+
+.markdown p,
+.markdown li {
+  color: #475467;
+  line-height: 1.85;
+}
+
+.markdown pre {
+  margin: 20px 0;
+  padding: 20px 22px;
+  background: #f7f8fa;
+  border: 1px solid #eaecf0;
+  border-radius: 11px;
 }
 
 .markdown table {
@@ -550,7 +771,8 @@ samp {
   width: 100%;
   overflow: hidden;
   border: 1px solid var(--gg-line);
-  border-radius: 10px;
+  border-radius: 11px;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 3%);
 }
 
 .markdown th {
@@ -619,6 +841,38 @@ samp {
 }
 
 @media (max-width: 900px) {
+  .dumi-default-header-content {
+    height: 64px;
+    padding-inline: 20px;
+  }
+
+  .dumi-default-header-left {
+    flex-basis: auto;
+    width: auto;
+  }
+
+  .gg-brand-logo-company {
+    width: 108px;
+  }
+
+  .gg-brand-logo-company img {
+    width: 96px;
+  }
+
+  .dumi-default-doc-layout:not(:has(.gg-home-hero)) > main {
+    padding: 0 24px 40px;
+  }
+
+  .dumi-default-doc-layout:not(:has(.gg-home-hero)) > main > section {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .dumi-default-doc-layout:not(:has(.gg-home-hero)) .dumi-default-content {
+    padding: 28px 24px 0;
+  }
+
   .gg-home-shell {
     grid-template-columns: 1fr;
     gap: 56px;
@@ -726,4 +980,34 @@ html[data-prefers-color='dark'] body {
 html[data-prefers-color='dark'] .dumi-default-header:not([data-static]) {
   background: rgb(13 17 27 / 86%);
   border-bottom-color: rgb(255 255 255 / 8%);
+}
+
+html[data-prefers-color='dark'] .dumi-default-doc-layout:not(:has(.gg-home-hero)) {
+  background: #0d111b;
+}
+
+html[data-prefers-color='dark'] .dumi-default-doc-layout:not(:has(.gg-home-hero)) > main > section {
+  background: #151a24;
+  border-color: #252c3a;
+}
+
+html[data-prefers-color='dark'] .dumi-default-sidebar > dl > dd > a.active {
+  background: rgb(37 99 235 / 16%);
+}
+
+html[data-prefers-color='dark'] .markdown h1,
+html[data-prefers-color='dark'] .markdown h2,
+html[data-prefers-color='dark'] .markdown h3 {
+  color: #f2f4f7;
+}
+
+html[data-prefers-color='dark'] .markdown p,
+html[data-prefers-color='dark'] .markdown li {
+  color: #b6bdc9;
+}
+
+html[data-prefers-color='dark'] .markdown pre,
+html[data-prefers-color='dark'] .markdown th {
+  background: #10141d;
+  border-color: #2b3241;
 }

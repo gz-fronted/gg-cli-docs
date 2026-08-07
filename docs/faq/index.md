@@ -1,9 +1,8 @@
 ---
 title: 常见问题
 order: 1
+toc: content
 ---
-
-# 常见问题
 
 这里集中整理使用 gg-cli 创建项目后，在开发、构建和部署阶段最常见的问题。
 
@@ -41,7 +40,7 @@ gg-cli 文档不会跟随模板的每次小改动自动同步；如果出现大�
 - `npm run dev`：连接当前 development 配置中的真实接口。
 - `npm run mock`：启动 MSW，由本地声明为已匹配请求返回模拟数据。
 
-两者都只用于本地开发，不生成部署产物。详细说明见[项目命令](/commands)。
+两者都只用于本地开发，不生成部署产物。详细说明见[命令行](/getting-started/commands)。
 
 ### 修改 `.env.*` 后为什么没有生效？
 
@@ -67,7 +66,7 @@ gg-cli 文档不会跟随模板的每次小改动自动同步；如果出现大�
 | 内网 SIT / 集成测试环境 | `npm run build:sit` | `dist/` |
 | 生产环境 | `npm run build` | `dist/` |
 
-不要把 `npm run dev` 的本地开发服务器当作内网部署服务。完整映射见[项目命令](/commands#构建与环境映射)。
+不要把 `npm run dev` 的本地开发服务器当作内网部署服务。完整映射见[部署](/getting-started/deployment)。
 
 ### 部署后请求到了错误的后端
 
@@ -94,11 +93,3 @@ npm run analyze
 ```
 
 查看大依赖、重复依赖和不必要的整包引入。该命令用于诊断，不替代 `build:dev`、`build:sit` 或正式构建任务。
-
-### main-app 为什么没有 `build:sit`？
-
-不同模板当前提供的 scripts 不完全一致。`micro-app` 包含 `mock`、`build:dev` 和 `build:sit`；main-app 应以实际 `package.json` 为准。如果内网流水线需要新增环境脚本，应由模板维护者统一补充对应 mode 和 `.env.*`，不要在部署平台临时猜测命令。
-
-## 仍未解决
-
-提问题时请提供：项目模板与版本、执行的完整命令、目标环境、Node.js 版本和已脱敏的错误信息。不要附带账号、Token、内网凭据或真实业务数据。

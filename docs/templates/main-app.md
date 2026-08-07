@@ -1,6 +1,7 @@
 ---
 title: main-app
 order: 3
+toc: content
 ---
 
 # main-app 模板

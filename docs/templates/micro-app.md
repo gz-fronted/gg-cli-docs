@@ -1,6 +1,7 @@
 ---
 title: micro-app
 order: 2
+toc: content
 ---
 
 # micro-app 模板
@@ -58,4 +59,4 @@ docs/            # 当前项目开发规范
 npm run dev
 ```
 
-后端未就绪时使用 `npm run mock`。内网开发、SIT 与正式环境的构建命令见[项目命令](/commands)，日常编码约定见[开发提示](/getting-started/development-guide)。
+后端未就绪时使用 `npm run mock`。内网开发、SIT 与正式环境的构建命令见[命令行](/getting-started/commands)，日常约定见[编码规范](/getting-started/coding-standards)。
