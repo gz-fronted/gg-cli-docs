@@ -28,7 +28,11 @@ React 和 gg-ui 是 peer dependencies；Axios 与 ahooks 随 gz-pc 安装。
 ## 常用导入
 
 ```ts
-import { configureGzFetch, gzFetch } from '@gz-fronted/gz-pc/fetch';
+import {
+  configureGzFetch,
+  GzFetchFeedbackProvider,
+  gzFetch,
+} from '@gz-fronted/gz-pc/fetch';
 import { useRequest } from '@gz-fronted/gz-pc/hooks';
 import { formatDate } from '@gz-fronted/gz-pc/utils';
 ```
@@ -44,14 +48,14 @@ import { gzFetch } from '@gz-fronted/gz-pc';
 
 | 子路径 | 内容 | 是否依赖 React |
 | --- | --- | --- |
-| `/fetch` | 请求配置、默认实例、独立实例、错误与中间件 | 否；错误提示可使用 gg-ui |
+| `/fetch` | 请求配置、默认实例、独立实例、错误、反馈 Provider 与中间件 | 请求核心否；反馈 Provider 是 |
 | `/hooks` | 统一透传 ahooks 的公开 API | 是 |
 | `/utils` | 日期格式化、Query 转换 | 否 |
 
 ## 业务开发约定
 
 - API 函数集中放在项目的 `src/api`，并声明请求和响应类型。
-- baseURL、Token 和统一错误提示在应用启动阶段配置一次。
+- baseURL、Token 和统一错误提示在应用启动阶段配置一次；反馈 Provider 在主题根节点挂载一次。
 - 普通业务模块不要重复初始化，也不要为每个页面创建请求实例。
 - 遇到通用需求先确认 gz-pc 是否已有能力，避免项目重复实现。
 

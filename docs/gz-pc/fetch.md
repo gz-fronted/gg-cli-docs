@@ -19,10 +19,31 @@ configureGzFetch({
   timeout: 15_000,
   getToken: () => useGlobalStore.getState().token ?? undefined,
   showErrorMessage: true,
+  unauthorized: {
+    enabled: true,
+  },
 });
 ```
 
 Garfish 重新挂载时可以覆盖上次配置。普通业务模块不应重复调用初始化，也不应自行创建请求实例。
+
+`unauthorized.enabled` 的库默认值为 `false`，只有业务项目显式开启后才统一处理 401。
+gg-cli 的 micro-app 模板已经显式开启，并在根主题节点接入反馈 Provider。
+
+## 接入反馈 Provider
+
+在 gg-ui `ConfigProvider` 内挂载一次 `GzFetchFeedbackProvider`：
+
+```tsx | pure
+import { GzFetchFeedbackProvider } from '@gz-fronted/gz-pc/fetch';
+
+<ConfigProvider themeMode={themeMode}>
+  <GzFetchFeedbackProvider>{children}</GzFetchFeedbackProvider>
+</ConfigProvider>;
+```
+
+Provider 负责普通错误 message 和 401 Modal，并复用当前 gg-ui 上下文实时跟随亮色、暗色主题。
+micro-app 模板已完成接入，业务页面无需重复挂载。
 
 ## 业务请求
 
@@ -72,6 +93,31 @@ export const getUser = (params: UserQuery): Promise<UserDetail> =>
 | `skipAuth` | `boolean` | 是否跳过 Token 注入 |
 | `responseType` | `json \| blob \| text` | 响应类型 |
 | `signal` | `AbortSignal` | 标准请求取消信号 |
+| `withCredentials` | `boolean` | 是否携带跨域 Cookie 等凭证 |
+
+## 初始化配置
+
+除 `baseURL`、`timeout`、`getToken`、`showErrorMessage`、`auth` 和 `middlewares` 外，实例还支持：
+
+- `validateStatus`：自定义 HTTP 成功状态范围，默认接受所有 `2xx`。
+- `unauthorized`：可选的统一 HTTP 401 处理配置。
+
+```ts
+interface GzFetchUnauthorizedOptions {
+  enabled?: boolean;
+  loginUrl?: string;
+  modalTitle?: string;
+  modalMessage?: string;
+  onUnauthorized?: () => void;
+}
+```
+
+公共默认值分别是 `false`、`/login`、`登录失效` 和
+`当前登录状态已失效，请重新登录。`。用户确认 Modal 后优先执行 `onUnauthorized`；未提供
+回调时才跳转到 `loginUrl`。
+
+401 Modal 使用模块级全局共享状态，所有 gzFetch 实例共用。首个 401 打开 Modal，后续并发
+401 被忽略；确认动作只执行一次，关闭动画结束后释放状态，后续新的 401 仍可再次弹窗。
 
 ## Token
 
