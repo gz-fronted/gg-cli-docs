@@ -47,6 +47,7 @@ export default defineConfig({
         ],
       },
       { title: '常见问题', link: '/faq' },
+      { title: '更新日志', link: '/changelog' },
     ],
     footer: 'gg-cli · 前端项目脚手架',
   },

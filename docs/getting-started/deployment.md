@@ -17,7 +17,7 @@ toc: content
 <div className="gz-callout gz-callout-warning">
   <strong>新应用部署前必改</strong>
   <p>
-    模板中的 <code>VITE_API_SERVER</code> 默认使用 <code>8599</code> 作为占位端口。申请到正式端口后，必须将对应环境文件里的端口改为实际分配值，不能直接沿用模板端口，也不要自行猜测端口。
+    模板中的 <code>VITE_API_SERVER</code> 使用占位地址和端口。申请到正式部署信息后，必须将对应环境文件改为实际分配值，不能直接沿用模板配置，也不要自行猜测。
   </p>
 </div>
 
@@ -29,14 +29,14 @@ toc: content
 
 ```dotenv
 # .env.development
-VITE_API_SERVER=http://172.16.31.163:{申请的端口}/
+VITE_API_SERVER=http://<DEV_HOST>:<PORT>/
 
 # .env.sit
-VITE_API_SERVER=http://172.16.31.76:{申请的端口}/
+VITE_API_SERVER=http://<SIT_HOST>:<PORT>/
 ```
 
-- 模板中的开发环境主机为 `172.16.31.163`，SIT 环境主机为 `172.16.31.76`。
-- 通常只需要把占位端口 `8599` 替换为申请分配的端口；如部署负责人另有说明，以实际部署信息为准。
+- `DEV_HOST`、`SIT_HOST` 和 `PORT` 均以部署申请结果为准，公网文档不记录公司内网地址。
+- 将模板中的占位主机和端口替换为实际分配值；如部署负责人另有说明，以实际部署信息为准。
 - 开发环境和 SIT 环境可能使用相同端口，但仍应以申请结果为准。
 - 必须在执行对应环境的构建命令**之前**完成修改。已经生成的 `dist/` 不会因环境文件后续变化而自动更新。
 
@@ -53,7 +53,7 @@ VITE_API_SERVER=http://172.16.31.76:{申请的端口}/
 
 ## 部署检查
 
-- 确认 `VITE_API_SERVER` 中的 `8599` 已替换为申请分配的正式端口。
+- 确认 `VITE_API_SERVER` 中的占位主机和端口已替换为申请分配值。
 - 确认修改的是本次构建所读取的 `.env.*` 文件。
 - 不要把 `npm run dev` 当作服务器部署方式。
 - 确认流水线执行的命令与目标环境一致。

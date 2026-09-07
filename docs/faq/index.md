@@ -56,6 +56,37 @@ gg-cli 文档不会跟随模板的每次小改动自动同步；如果出现大�
 
 新业务代码优先使用 gz-pc 提供的统一请求能力，避免每个项目重复处理 baseURL、错误提示和中间件。查看 [gz-pc 请求能力](/gz-pc/fetch)。
 
+## 请求反馈与 401
+
+### 升级 gz-pc 后为什么没有登录失效弹窗？
+
+库默认不处理 401。检查应用初始化中的 `unauthorized.enabled: true` 和主题根节点中的
+`GzFetchFeedbackProvider` 是否都已接入；同时确认实际使用的客户端没有被后续初始化覆盖。
+完整接入见[请求反馈与 401](/gz-pc/feedback)。
+
+### 为什么打开弹窗后还有错误 message？
+
+开启统一 401 后，gzFetch 会抑制该请求的普通 message。检查页面 catch、
+`useRequest.onError` 或错误中间件是否重复调用 `message.error`。401 仍会 reject，
+业务层可以更新状态，但不需要再次展示同一错误。
+
+### 配置了 showErrorMessage: false，为什么 401 仍然弹窗？
+
+该选项仅控制普通错误 message，401 由初始化配置的 `unauthorized.enabled` 独立控制。
+`skipAuth` 也只负责跳过 Token 注入，不是关闭 401 的开关。
+
+### 如何模拟 401？为什么 Network 没看到请求？
+
+使用 `npm run mock`，将声明式 Mock 的 HTTP `status` 设置为 `401` 并注册模块。
+只在响应 JSON 中写 `code: 401` 不会生效。若测试按钮使用 `manual: true`，需要点击后才发出请求。
+可复制的 API、Mock 和按钮示例见[本地验证说明](/gz-pc/feedback)。
+
+### 旧 Modal 能跟随主题，还需要换 Provider 吗？
+
+推荐迁移到 `GzFetchFeedbackProvider`，它统一管理普通 message 与 401 Modal。
+旧 `GzFetchUnauthorizedModal` 保留兼容，但不负责普通消息的上下文注册；
+静态 message 的颜色变化不等同于继承 React 主题上下文。
+
 ## 构建与内网部署
 
 ### 内网开发环境和 SIT 环境分别用哪个命令？

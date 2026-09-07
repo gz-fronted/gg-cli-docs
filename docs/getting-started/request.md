@@ -41,6 +41,9 @@ configureGzFetch({
 - Garfish 应用重新挂载时，可以由应用入口覆盖上一次配置。
 - 模板显式开启了统一 401 登录失效处理；gz-pc 库本身仍然默认关闭，已有项目升级后不会自动改变行为。
 
+`configureGzFetch` 会替换整个默认客户端，修改配置时保留原有 baseURL、Token 等字段；不要在页面
+再调用一次仅含 unauthorized 的初始化。
+
 在初始化之前调用 `gzFetch` 会直接抛出“尚未配置”的错误，不会静默使用空配置，也不会自行读取 `localStorage`。
 
 ## 根节点请求反馈
@@ -61,7 +64,7 @@ micro-app 模板已经在 `AppThemeProvider` 的 gg-ui `ConfigProvider` 内挂�
 
 | 能力 | 默认行为 |
 | --- | --- |
-| 请求超时 | `15000ms` |
+| 请求超时 | 模板配置 `10000ms`；库默认 `15000ms` |
 | Token Header | `Authorization` |
 | Token 格式 | `Bearer <token>` |
 | 错误提示 | 默认开启，通过根节点 Provider 调用 gg-ui 的 `message.error` |
@@ -149,34 +152,17 @@ micro-app 模板默认开启 401 处理。请求收到 401 后不会再展示普
 全局共享管理器只打开一个登录失效 Modal；即使多个请求或多个 gzFetch 实例同时收到 401，
 也不会重复弹窗或重复执行登录动作。
 
-默认文案和跳转地址为：
+默认标题为“登录失效”，正文为“当前登录状态已失效，请重新登录。”。用户确认后使用
+`window.location.assign('/login')` 导航；取消或关闭不跳转。项目需要自己提供有效的登录页。
 
-```ts
-unauthorized: {
-  enabled: false,
-  loginUrl: '/login',
-  modalTitle: '登录失效',
-  modalMessage: '当前登录状态已失效，请重新登录。',
-}
-```
+只需调整登录地址时，在原有 `configureRequest` 配置中的 `unauthorized` 添加 `loginUrl`；
+SSO 或主应用统一登录可以提供 `onUnauthorized`，确认后优先执行该回调，不再默认跳转。
 
-这里的 `enabled: false` 是库默认值；模板通过初始化配置将它改为 `true`。如需覆盖登录地址
-或文案，在 `src/bootstrap/configure-request.ts` 修改：
+`showErrorMessage: false` 只关闭普通提示，不会关闭已经开启的 401 Modal。
+业务页面不要重复调用 `message.error` 展示同一个请求错误。
 
-```ts
-configureGzFetch({
-  unauthorized: {
-    enabled: true,
-    loginUrl: '/sso/login',
-    modalTitle: '登录状态已过期',
-    modalMessage: '请重新登录后继续使用。',
-  },
-});
-```
-
-特殊项目可提供 `onUnauthorized: () => void` 处理 SSO、退出登录、业务状态清理或主应用跳转。
-传入回调后优先执行回调，不再执行 `loginUrl` 默认跳转。Garfish 子应用如果由主应用负责登录，
-应按照主应用契约提供该回调，不能假设子应用的 `/login` 一定是正确路由。
+完整 API、已有项目迁移、主题原理、Mock 按钮调试及“为什么没弹窗”的排查，统一见
+[请求反馈与 401](/gz-pc/feedback)。
 
 ## Token 与公开接口
 
