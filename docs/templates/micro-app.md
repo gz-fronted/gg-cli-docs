@@ -47,11 +47,19 @@ docs/            # 当前项目开发规范
 
 - React、TypeScript、Vite、React Router 和 Zustand。
 - gg-ui 与 Ant Design 组件能力。
-- gz-pc 请求、Hooks 和工具函数。
+- gz-pc 请求、Hooks 和工具函数，包括主题感知的统一错误反馈与全局单例 401 登录失效弹窗。
 - MSW 声明式 Mock。
 - AG Grid、ECharts、测试和代码检查工具。
 
 具体版本以当前项目的 `package.json` 为准。
+
+gz-pc 与模板的更新见[更新日志](/changelog)。已有项目不会自动同步模板变化，需按接入说明升级。
+
+模板在启动配置中显式开启 401 处理，并在 `AppThemeProvider` 内接入
+`GzFetchFeedbackProvider`。普通业务页面不需要维护弹窗状态或重复显示请求错误；SSO 或由主应用
+负责登录时，只在应用初始化层覆盖 `unauthorized.onUnauthorized` 或 `loginUrl`。完整配置见
+[请求](/getting-started/request)。已有项目迁移、登录行为和弹窗调试见
+[请求反馈与 401](/gz-pc/feedback)。
 
 ## 开始开发
 

@@ -22,7 +22,7 @@ toc: content
 <div className="gz-callout gz-callout-warning">
   <strong>注意端口</strong>
   <p>
-    新应用必须把 <code>VITE_API_SERVER</code> 中的占位端口 <code>8599</code> 替换为申请分配的正式端口，具体操作见<a href="/getting-started/deployment">部署</a>。
+    新应用必须把 <code>VITE_API_SERVER</code> 中的占位主机和端口替换为申请分配值，具体操作见<a href="/getting-started/deployment">部署</a>。
   </p>
 </div>
 

@@ -29,6 +29,9 @@ configureGzFetch({
   timeout: 10_000,
   getToken: () => useGlobalStore.getState().token ?? undefined,
   showErrorMessage: true,
+  unauthorized: {
+    enabled: true,
+  },
 });
 ```
 
@@ -36,21 +39,40 @@ configureGzFetch({
 - `getToken` 会在每次请求前执行，确保拿到最新 Token。
 - 普通业务模块直接导入并使用 `gzFetch`，不重复调用 `configureGzFetch`。
 - Garfish 应用重新挂载时，可以由应用入口覆盖上一次配置。
+- 模板显式开启了统一 401 登录失效处理；gz-pc 库本身仍然默认关闭，已有项目升级后不会自动改变行为。
+
+`configureGzFetch` 会替换整个默认客户端，修改配置时保留原有 baseURL、Token 等字段；不要在页面
+再调用一次仅含 unauthorized 的初始化。
 
 在初始化之前调用 `gzFetch` 会直接抛出“尚未配置”的错误，不会静默使用空配置，也不会自行读取 `localStorage`。
+
+## 根节点请求反馈
+
+micro-app 模板已经在 `AppThemeProvider` 的 gg-ui `ConfigProvider` 内挂载
+`GzFetchFeedbackProvider`：
+
+```tsx | pure
+<ConfigProvider themeMode={themeMode}>
+  <GzFetchFeedbackProvider>{children}</GzFetchFeedbackProvider>
+</ConfigProvider>
+```
+
+它统一承载普通错误 message 和 401 Modal，使两者实时继承当前亮色或暗色主题。业务页面不需要
+再次挂载 Provider，也不要对同一个请求错误重复调用 `message.error`。
 
 ## 初始化后的默认能力
 
 | 能力 | 默认行为 |
 | --- | --- |
-| 请求超时 | `15000ms` |
+| 请求超时 | 模板配置 `10000ms`；库默认 `15000ms` |
 | Token Header | `Authorization` |
 | Token 格式 | `Bearer <token>` |
-| 错误提示 | 默认开启，调用 gg-ui 的 `message.error` |
-| 成功状态 | 只有 HTTP Status `200` 视为成功 |
+| 错误提示 | 默认开启，通过根节点 Provider 调用 gg-ui 的 `message.error` |
+| 成功状态 | 所有 HTTP `2xx` 状态视为成功 |
 | 成功响应 | 直接返回原始 `response.data` |
 | HTTP 错误文案 | 优先读取响应体中的非空 `msg` |
 | 取消请求 | 抛出 `CANCELED_ERROR`，不展示错误消息 |
+| HTTP 401 | gz-pc 默认关闭；micro-app 模板显式开启全局单例登录失效弹窗 |
 
 gzFetch 不判断业务 `code`，不自动解包响应中的 `data`，也不会转换分页、字段或日期。接口返回什么结构，API 函数就按什么结构声明响应类型。
 
@@ -64,8 +86,10 @@ gzFetch 不判断业务 `code`，不自动解包响应中的 `data`，也不会�
 | `timeout` | `10000ms` | `15000ms` | 实例默认超时时间 |
 | `getToken` | 从全局 Store 动态读取 | 无 | 每次请求前获取最新 Token |
 | `showErrorMessage` | `true` | `true` | 是否默认调用 gg-ui 的 `message.error` |
+| `validateStatus` | 沿用库默认值 | 所有 `2xx` | 自定义 HTTP 成功状态范围 |
 | `auth.headerName` | 沿用库默认值 | `Authorization` | Token 使用的请求头名称 |
 | `auth.formatToken` | 沿用库默认值 | `Bearer ${token}` | Token 写入请求头前的格式化方式 |
+| `unauthorized` | `{ enabled: true }` | `{ enabled: false }` | HTTP 401 弹窗与登录处理 |
 | `middlewares` | `[]` | `[]` | 按顺序执行的请求、响应和错误中间件 |
 
 普通项目通常只需要配置 `baseURL` 和 `getToken`，其余参数按团队默认值运行。只有全项目都需要改变时，才在初始化层修改实例配置。
@@ -116,8 +140,29 @@ export const getUser = (params: UserQuery) =>
 | `skipAuth` | `boolean` | 否 | 为 `true` 时跳过 Token 获取与注入 |
 | `responseType` | `json \| blob \| text` | 否 | 响应数据类型，默认按 JSON 处理 |
 | `signal` | `AbortSignal` | 否 | 使用标准 AbortController 取消请求 |
+| `withCredentials` | `boolean` | 否 | 是否携带跨域 Cookie 等凭证 |
 
-当前公开配置不包含 `data`、`withCredentials`、`paramsSerializer`、`onUploadProgress` 或自定义 `validateStatus`，也暂不支持 `PATCH`。出现通用需求时应由 gz-pc 统一扩展，不在业务项目中绕过类型限制。
+当前公开的单次请求配置不包含 `data`、`paramsSerializer` 或 `onUploadProgress`，也暂不支持
+`PATCH`。自定义 `validateStatus` 属于实例初始化配置。出现通用需求时应由 gz-pc 统一扩展，
+不在业务项目中绕过类型限制。
+
+## 统一处理 HTTP 401
+
+micro-app 模板默认开启 401 处理。请求收到 401 后不会再展示普通错误 message，而是通过
+全局共享管理器只打开一个登录失效 Modal；即使多个请求或多个 gzFetch 实例同时收到 401，
+也不会重复弹窗或重复执行登录动作。
+
+默认标题为“登录失效”，正文为“当前登录状态已失效，请重新登录。”。用户确认后使用
+`window.location.assign('/login')` 导航；取消或关闭不跳转。项目需要自己提供有效的登录页。
+
+只需调整登录地址时，在原有 `configureRequest` 配置中的 `unauthorized` 添加 `loginUrl`；
+SSO 或主应用统一登录可以提供 `onUnauthorized`，确认后优先执行该回调，不再默认跳转。
+
+`showErrorMessage: false` 只关闭普通提示，不会关闭已经开启的 401 Modal。
+业务页面不要重复调用 `message.error` 展示同一个请求错误。
+
+完整 API、已有项目迁移、主题原理、Mock 按钮调试及“为什么没弹窗”的排查，统一见
+[请求反馈与 401](/gz-pc/feedback)。
 
 ## Token 与公开接口
 

@@ -43,3 +43,5 @@ DOCS_ORIGIN=https://your-docs-domain.example pnpm build
 ## 内容更新策略
 
 本站不自动同步各工具仓库。发生重要功能或大版本变化后，维护者根据源代码和发行说明手动更新并重新发布。
+
+gz-pc 更新并完成 micro-app 适配后，按 [文档维护流程](docs/maintenance.md) 核对版本、同步示例并构建发布，同时在 [更新日志](docs/changelog.md) 简要记录功能变化和接入说明。
