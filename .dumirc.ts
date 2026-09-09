@@ -43,7 +43,7 @@ export default defineConfig({
         title: '配套工具',
         children: [
           { title: 'gz-pc', link: '/gz-pc' },
-          { title: 'gg-ui', link: '/gg-ui' },
+          { title: 'gg-ui', link: 'https://gz-ui-cyan.vercel.app' },
         ],
       },
       { title: '常见问题', link: '/faq' },
