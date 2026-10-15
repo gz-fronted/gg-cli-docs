@@ -12,24 +12,24 @@ toc: content
 
 ```bash
 node -v
-gg-cli --version
+gz-cli --version
 ```
 
 ## 无法下载模板
 
 依次检查：
 
-1. 当前账号是否拥有仓库读取权限。
-2. GitHub CLI、SSH 或 Git Credential Manager 是否已经登录。
-3. 当前账号的仓库权限是否生效。
-4. 当前网络是否需要代理。
+1. 本机是否已安装 Git。
+2. 当前网络或代理能否访问注册仓库和模板仓库。
+3. 配置中的仓库地址和版本是否正确。
+4. 使用私有仓库或 SSH 地址时，再检查凭据和读取权限。默认公共 HTTPS 仓库无需登录。
 
 不要把个人 Token 写进命令、项目文件或截图。
 
 ## 模板不是最新版本
 
 ```bash
-gg-cli init demo-app --refresh
+gz-cli init demo-app --refresh
 ```
 
 如果仍不一致，请联系脚手架维护者确认模板是否已经发布。

@@ -9,23 +9,28 @@ toc: content
 ## init
 
 ```bash
-gg-cli init [project-name] [options]
+gz-cli init [project-name] [options]
 ```
 
 | 参数 | 说明 | 示例 |
 | --- | --- | --- |
-| `[project-name]` | 可选项目名；未提供时交互输入 | `gg-cli init order-center` |
+| `[project-name]` | 可选项目名；未提供时交互输入 | `gz-cli init order-center` |
 | `--pm <package-manager>` | 指定 npm、pnpm 或 yarn | `--pm npm` |
 | `--proxy <url>` | 为本次初始化指定 HTTP(S) 代理 | `--proxy http://proxy-host:8080` |
-| `--no-proxy` | 强制直连，不读取环境或系统代理 | `gg-cli init demo --no-proxy` |
-| `--refresh` | 忽略配置和模板缓存，强制获取远程最新内容 | `gg-cli init demo --refresh` |
+| `--no-proxy` | 强制直连，不读取环境或系统代理 | `gz-cli init demo --no-proxy` |
+| `--refresh` | 忽略配置和模板缓存，强制获取远程最新内容 | `gz-cli init demo --refresh` |
+
+## 兼容入口
+
+`gz-cli create demo-app` 与 `gz-cli init demo-app` 使用相同逻辑和参数；
+`gz-cli-front init demo-app` 仍可使用。未全局安装时执行 `npx gz-cli-front init demo-app`。
 
 ## 包管理器选择
 
 显式指定：
 
 ```bash
-gg-cli init demo-app --pm pnpm
+gz-cli init demo-app --pm pnpm
 ```
 
 未指定时，CLI 按以下顺序检测本机可用命令：

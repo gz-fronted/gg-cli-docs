@@ -46,7 +46,7 @@ docs/            # 当前项目开发规范
 ## 模板内置能力
 
 - React、TypeScript、Vite、React Router 和 Zustand。
-- gg-ui 与 Ant Design 组件能力。
+- gz-ui-web 与 Ant Design 组件能力。
 - gz-pc 请求、Hooks 和工具函数，包括主题感知的统一错误反馈与全局单例 401 登录失效弹窗。
 - MSW 声明式 Mock。
 - AG Grid、ECharts、测试和代码检查工具。

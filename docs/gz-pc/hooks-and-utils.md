@@ -44,4 +44,4 @@ objectToQuery({ page: 1, tag: ['a', 'b'] });
 // page=1&tag=a&tag=b
 ```
 
-这些工具不依赖 React、ahooks、Axios 或 gg-ui，适合在纯 TypeScript 模块使用。
+这些工具不依赖 React、ahooks、Axios 或 gz-ui-web，适合在纯 TypeScript 模块使用。

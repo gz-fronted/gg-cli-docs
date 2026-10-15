@@ -23,7 +23,7 @@ toc: content
 - Vite 多环境开发和生产构建。
 - React Router 7 与 Zustand 5。
 - Less、ESLint、Prettier、Vitest。
-- gg-ui；缺失组件时按规范使用 Ant Design。
+- gz-ui-web；缺失组件时按规范使用 Ant Design。
 - ECharts 与 AG Grid 等业务基础能力。
 
 开始开发前先阅读[快速开始](/getting-started)；不同模板的具体版本和脚本以生成项目的 `package.json` 为准。项目创建完成后独立维护，不会被后续模板自动覆盖。

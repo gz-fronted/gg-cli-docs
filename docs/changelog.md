@@ -6,6 +6,26 @@ toc: content
 
 # 更新日志
 
+## gg-cli-template-micro-app - 2026-10-15
+
+- 模板升级 `gz-pc@0.2` 和 `gz-ui-web`。
+- 模板增加开发阶段的壳子能力。
+
+## gz-pc 0.2.0 - 2026-10-15
+
+- 反馈组件依赖由 `@chenhui996/gg-ui` 切换为 `gz-ui-web`，宿主需使用 React 19 和 `gz-ui-web@^1.0.1`。
+- 新增实例级配置 `preserveNumberPrecision`（默认关闭），可通过 `configureGzFetch` 全局开启；超出安全范围的整数和转换时会丢失精度的小数保留为原始字符串，普通数字与已有字符串不变。
+- 精度保护同时适用于成功和 HTTP 错误响应；显式文本和 Blob 下载不参与转换。
+
+## gz-cli-front 1.0.1 - 2026-10-15
+
+- 新增 `gz-cli` 主命令，支持 `gz-cli init` 和 `gz-cli create`，保留 `gz-cli-front` 兼容入口。
+- 更新安装与旧包迁移说明；安装包名仍为 `gz-cli-front`，不注册旧的 `gg-cli` 命令。
+
+## gz-cli-front 1.0.0 - 2026-10-10
+
+- 以 `gz-cli-front` 独立包正式发布，通过远程模板创建项目。
+
 ## gz-pc 0.1.2 - 2026-09-11
 
 ### Changes

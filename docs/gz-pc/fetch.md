@@ -32,14 +32,14 @@ Garfish 重新挂载时可以覆盖上次配置。`configureGzFetch` 会替换�
 localStorage；模板由启动流程和 Store 管理 Token。
 
 `unauthorized.enabled` 的库默认值为 `false`，只有业务项目显式开启后才统一处理 401。
-gg-cli 的 micro-app 模板已经显式开启，并在根主题节点接入反馈 Provider。
+gz-cli 的 micro-app 模板已经显式开启，并在根主题节点接入反馈 Provider。
 
 ## 接入反馈 Provider
 
-在 gg-ui `ConfigProvider` 内挂载一次 `GzFetchFeedbackProvider`：
+在 gz-ui-web `ConfigProvider` 内挂载一次 `GzFetchFeedbackProvider`：
 
 ```tsx | pure
-import { ConfigProvider } from '@chenhui996/gg-ui';
+import { ConfigProvider } from 'gz-ui-web';
 import { GzFetchFeedbackProvider } from '@gz-fronted/gz-pc/fetch';
 
 <ConfigProvider themeMode={themeMode}>
@@ -47,7 +47,7 @@ import { GzFetchFeedbackProvider } from '@gz-fronted/gz-pc/fetch';
 </ConfigProvider>;
 ```
 
-Provider 负责普通错误 message 和 401 Modal，并复用当前 gg-ui 上下文实时跟随亮色、暗色主题。
+Provider 负责普通错误 message 和 401 Modal，并复用当前 gz-ui-web 上下文实时跟随亮色、暗色主题。
 micro-app 模板已完成接入，业务页面无需重复挂载。已有项目的完整接入、旧 Modal 迁移、SSO、
 配置默认值和本地调试见[请求反馈与 401](/gz-pc/feedback)。
 

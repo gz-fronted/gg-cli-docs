@@ -1,6 +1,7 @@
 node_modules/
 .pnpm-store/
 dist/
+dist-internal/
 .dumi/tmp*
 .env.local
 .DS_Store

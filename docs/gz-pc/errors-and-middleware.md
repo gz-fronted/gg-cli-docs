@@ -32,7 +32,7 @@ UNKNOWN_ERROR
 
 HTTP 错误优先读取响应体中的 `msg`。没有有效 `msg` 时使用默认错误文案，最终抛出 `GzFetchError`。
 
-接入 Provider 后，普通错误由 `GzFetchFeedbackProvider` 通过 gg-ui message 展示。Provider 应挂在 gg-ui
+接入 Provider 后，普通错误由 `GzFetchFeedbackProvider` 通过 gz-ui-web message 展示。Provider 应挂在 gz-ui-web
 `ConfigProvider` 内，因此 message 会跟随当前主题；业务层不要再次提示同一个错误。
 未挂载 Provider 时，普通错误兼容回退到静态 message。接入方式见[请求反馈与 401](/gz-pc/feedback)。
 

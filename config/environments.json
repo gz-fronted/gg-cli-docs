@@ -1,0 +1,14 @@
+{
+  "public": {
+    "outputPath": "dist",
+    "externalLinks": {
+      "gzUiWeb": "https://gz-ui-cyan.vercel.app"
+    }
+  },
+  "internal": {
+    "outputPath": "dist-internal",
+    "externalLinks": {
+      "gzUiWeb": "http://172.16.31.163:8549"
+    }
+  }
+}

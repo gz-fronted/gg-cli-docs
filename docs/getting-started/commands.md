@@ -6,7 +6,7 @@ toc: content
 
 # 命令行
 
-这里说明的是 gg-cli 生成项目中 `package.json` 的常用 scripts。
+这里说明的是 gz-cli 生成项目中 `package.json` 的常用 scripts。
 
 ## 常用命令
 
@@ -50,4 +50,4 @@ npm run lint
 
 上表以 `micro-app` 为准。`main-app` 当前提供的 scripts 可能不同，执行前以项目自己的 `package.json` 为准。
 
-如果需要指定包管理器、代理或强制刷新模板，查看 [gg-cli 参数](/cli/commands)。
+如果需要指定包管理器、代理或强制刷新模板，查看 [gz-cli 参数](/cli/commands)。
