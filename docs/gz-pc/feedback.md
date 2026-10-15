@@ -57,7 +57,7 @@ export const configureRequest = (): void => {
 保留原有 `prefixCls`、`cssVarScope`、语言和其他主题配置。
 
 ```tsx | pure
-import { ConfigProvider, type GZThemeMode } from '@chenhui996/gg-ui';
+import { ConfigProvider, type GZThemeMode } from 'gz-ui-web';
 import { GzFetchFeedbackProvider } from '@gz-fronted/gz-pc/fetch';
 import type { FC, ReactNode } from 'react';
 
@@ -156,9 +156,9 @@ Garfish 子应用应先确认登录由谁负责：由主应用统一处理时，
 
 ## 为什么能跟随主题
 
-Provider 使用 gg-ui 的 `message.useMessage()`，将其 `contextHolder` 和受控 Modal
+Provider 使用 gz-ui-web 的 `message.useMessage()`，将其 `contextHolder` 和受控 Modal
 放在业务的 `ConfigProvider` 内。请求层只分发反馈，渲染由这棵 React 树负责；
-当前主题变化时，消息和弹窗沿用 gg-ui 的主题能力，不需要额外的亮色/暗色 CSS。
+当前主题变化时，消息和弹窗沿用 gz-ui-web 的主题能力，不需要额外的亮色/暗色 CSS。
 
 未挂载反馈 Provider 时，普通错误会兼容回退到静态 `message.error`。有些项目的全局
 CSS 变量恰好也能让静态消息跟随颜色，但这不代表它继承了局部 React 上下文。
@@ -221,7 +221,7 @@ export const requestUnauthorized = (): Promise<void> =>
 把以下临时组件挂到需要调试的页面中：
 
 ```tsx | pure
-import { Button } from '@chenhui996/gg-ui';
+import { Button } from 'gz-ui-web';
 import { useRequest } from '@gz-fronted/gz-pc/hooks';
 import type { FC } from 'react';
 import { requestUnauthorized } from '@/api/unauthorized-test';
@@ -266,6 +266,6 @@ await Promise.allSettled(
    以及后续是否又调用 `configureGzFetch` 覆盖了配置。
 4. **401 没有任何反馈**：检查根 Provider 是否挂载；自定义 `validateStatus` 不能把 401 判为成功。
 5. **Modal 和 message 同时出现**：检查页面 catch、`useRequest.onError` 和错误中间件是否重复 toast。
-6. **颜色不跟随**：确认 Provider 位于当前 gg-ui `ConfigProvider` 内，二者使用同一份 gg-ui；
+6. **颜色不跟随**：确认 Provider 位于当前 gz-ui-web `ConfigProvider` 内，二者使用同一份 gz-ui-web；
    多份组件库副本可能使 Context 不一致。
 7. **确认后跳错地址**：核对 `loginUrl`、路由前缀和 `onUnauthorized` 的优先级。

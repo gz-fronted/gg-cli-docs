@@ -6,7 +6,7 @@ toc: content
 
 # 快速上手
 
-用 gg-cli 创建一个符合团队约定、可以立即开发的 React 项目。
+用 gz-cli 创建一个符合团队约定、可以立即开发的 React 项目。
 
 ## 环境准备
 
@@ -16,16 +16,18 @@ toc: content
 node -v
 ```
 
-安装 gg-cli：
+安装 gz-cli：
 
 ```bash
-npm install -g @chenhui996/gg-cli
+npm install -g gz-cli-front
 ```
+
+包名为 `gz-cli-front`，安装后运行 `gz-cli`。旧包迁移方式见 [CLI 概览](/cli)。
 
 ## 创建项目
 
 ```bash
-gg-cli init demo-app
+gz-cli init demo-app
 ```
 
 根据项目角色选择模板：

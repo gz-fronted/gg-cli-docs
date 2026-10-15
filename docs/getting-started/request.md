@@ -15,7 +15,7 @@ toc: content
 ## 初始化 gzFetch
 
 <div class="gz-callout">
-  <strong>模板已经完成初始化：</strong>gg-cli 生成的 <code>micro-app</code> 已在 <code>src/bootstrap/configure-request.ts</code> 中配置 gzFetch，并由 <code>src/main.tsx</code> 在页面请求发出前调用。普通业务开发不需要再写一遍初始化代码。
+  <strong>模板已经完成初始化：</strong>gz-cli 生成的 <code>micro-app</code> 已在 <code>src/bootstrap/configure-request.ts</code> 中配置 gzFetch，并由 <code>src/main.tsx</code> 在页面请求发出前调用。普通业务开发不需要再写一遍初始化代码。
 </div>
 
 模板默认配置如下，只有维护模板或调整全项目请求策略时才需要修改：
@@ -48,7 +48,7 @@ configureGzFetch({
 
 ## 根节点请求反馈
 
-micro-app 模板已经在 `AppThemeProvider` 的 gg-ui `ConfigProvider` 内挂载
+micro-app 模板已经在 `AppThemeProvider` 的 gz-ui-web `ConfigProvider` 内挂载
 `GzFetchFeedbackProvider`：
 
 ```tsx | pure
@@ -67,7 +67,7 @@ micro-app 模板已经在 `AppThemeProvider` 的 gg-ui `ConfigProvider` 内挂�
 | 请求超时 | 模板配置 `10000ms`；库默认 `15000ms` |
 | Token Header | `Authorization` |
 | Token 格式 | `Bearer <token>` |
-| 错误提示 | 默认开启，通过根节点 Provider 调用 gg-ui 的 `message.error` |
+| 错误提示 | 默认开启，通过根节点 Provider 调用 gz-ui-web 的 `message.error` |
 | 成功状态 | 所有 HTTP `2xx` 状态视为成功 |
 | 成功响应 | 直接返回原始 `response.data` |
 | HTTP 错误文案 | 优先读取响应体中的非空 `msg` |
@@ -78,14 +78,14 @@ gzFetch 不判断业务 `code`，不自动解包响应中的 `data`，也不会�
 
 ## 初始化可选参数
 
-`configureGzFetch` 接收以下配置。表中的“库默认值”指 gz-pc 自身未传配置时的行为，“模板配置”指 gg-cli 当前生成项目已经提供的值。
+`configureGzFetch` 接收以下配置。表中的“库默认值”指 gz-pc 自身未传配置时的行为，“模板配置”指 gz-cli 当前生成项目已经提供的值。
 
 | 参数 | 模板配置 | 库默认值 | 说明 |
 | --- | --- | --- | --- |
 | `baseURL` | `VITE_API_BASE_URL` | 无 | 所有业务请求的基础地址 |
 | `timeout` | `10000ms` | `15000ms` | 实例默认超时时间 |
 | `getToken` | 从全局 Store 动态读取 | 无 | 每次请求前获取最新 Token |
-| `showErrorMessage` | `true` | `true` | 是否默认调用 gg-ui 的 `message.error` |
+| `showErrorMessage` | `true` | `true` | 是否默认调用 gz-ui-web 的 `message.error` |
 | `validateStatus` | 沿用库默认值 | 所有 `2xx` | 自定义 HTTP 成功状态范围 |
 | `auth.headerName` | 沿用库默认值 | `Authorization` | Token 使用的请求头名称 |
 | `auth.formatToken` | 沿用库默认值 | `Bearer ${token}` | Token 写入请求头前的格式化方式 |

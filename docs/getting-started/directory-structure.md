@@ -26,7 +26,7 @@ package.json     项目命令与依赖
 | 要做的事情 | 先看哪里 |
 | --- | --- |
 | 修改页面 | `src/pages` 中对应业务模块 |
-| 复用组件 | `src/components` 和 gg-ui |
+| 复用组件 | `src/components` 和 gz-ui-web |
 | 调用接口 | `src/api` |
 | 跨页面共享数据 | `src/store` |
 | 后端尚未提供接口 | `mock` |

@@ -11,7 +11,7 @@ toc: content
 ## 日常约定
 
 - 页面放在 `src/pages`，可复用交互再拆到 `src/components`。
-- 组件优先使用 gg-ui；缺失时再使用 Ant Design。
+- 组件优先使用 gz-ui-web；缺失时再使用 Ant Design。
 - 接口集中在 `src/api`，统一使用 gz-pc 请求能力。
 - 只有跨页面共享的数据才进入 store。
 - 不在代码中写死接口 Host、Token 或环境判断。

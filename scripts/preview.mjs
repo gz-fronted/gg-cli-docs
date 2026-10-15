@@ -1,8 +1,15 @@
-import { createReadStream, existsSync, statSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, resolve, sep } from 'node:path';
 
-const root = resolve('dist');
+const environments = JSON.parse(
+  readFileSync(new URL('../config/environments.json', import.meta.url), 'utf8'),
+);
+const target = process.argv[2] ?? 'public';
+if (!Object.hasOwn(environments, target)) {
+  throw new Error(`不支持的文档预览环境：${target}`);
+}
+const root = resolve(environments[target].outputPath);
 const port = Number(process.env.PORT || 8000);
 const mimeTypes = {
   '.css': 'text/css; charset=utf-8',

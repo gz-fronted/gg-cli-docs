@@ -1,44 +1,57 @@
-# gg-cli 文档站
+# gz-cli 文档站
 
-`gg-cli` 的安装、命令、项目模板与配套工具使用文档。
+`gz-cli` 的安装、命令、项目模板与配套工具使用文档。
 
 ## 本地开发
 
 环境要求：Node.js 22.19.0 或更高版本。
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
-## 构建
+## 内外网构建
 
-部署在域名根路径：
+| 环境 | 命令 | 产物目录 |
+| --- | --- | --- |
+| 公网 | `npm run build` | `dist/` |
+| 内网 | `npm run build:internal` | `dist-internal/` |
 
-```bash
-pnpm build
-```
+内外网的差异集中在 `config/environments.json`。当前 `externalLinks.gzUiWeb` 分别指向公网与内网组件文档，导航和正文链接共用该配置。后续其他差异链接也加入 `externalLinks`，正文通过 `<ExternalDocLink name="链接配置名" />` 引用。
 
-部署在 `/frontend-docs/` 等二级路径时，构建前设置 `DOCS_BASE`：
+构建时只将当前环境的链接写入产物；部署时选择对应目录。
+
+### 路径前缀和站点 Origin
+
+`DOCS_BASE`、`DOCS_ORIGIN` 对两种构建都有效。部署在二级路径时，例如：
 
 ```powershell
 $env:DOCS_BASE='/frontend-docs/'
-pnpm build
+npm run build:internal
 ```
 
 Linux/macOS：
 
 ```bash
-DOCS_BASE=/frontend-docs/ pnpm build
+DOCS_BASE=/frontend-docs/ npm run build:internal
 ```
 
-正式公网构建建议同时提供站点 Origin，以生成完整的分享预览图地址：
+需要完整分享预览图地址时设置 `DOCS_ORIGIN`：
+
+```powershell
+$env:DOCS_ORIGIN='https://your-docs-domain.example'
+npm run build
+```
+
+### 本地预览
 
 ```bash
-DOCS_ORIGIN=https://your-docs-domain.example pnpm build
+npm run preview
+npm run preview:internal
 ```
 
-构建产物位于 `dist`，同一代码库可以分别部署到公网和内网。
+分别预览 `dist/` 和 `dist-internal/`；默认端口为 `8000`，可通过 `PORT` 指定。
 
 ## 内容更新策略
 

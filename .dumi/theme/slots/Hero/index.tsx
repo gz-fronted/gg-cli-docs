@@ -25,7 +25,7 @@ export default function Hero() {
           </h1>
 
           <p>
-            gg-cli 把 React、Garfish、gg-ui、gz-pc 和多环境构建装进统一模板，
+            gz-cli 把 React、Garfish、gz-ui-web、gz-pc 和多环境构建装进统一模板，
             让每个新项目从第一行代码开始就保持一致。
           </p>
 
@@ -49,7 +49,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="gg-home-terminal-wrap" aria-label="gg-cli 创建项目示例">
+        <div className="gg-home-terminal-wrap" aria-label="gz-cli 创建项目示例">
           <div className="gg-home-terminal-orbit gg-home-orbit-one" aria-hidden="true" />
           <div className="gg-home-terminal-orbit gg-home-orbit-two" aria-hidden="true" />
 
@@ -60,14 +60,14 @@ export default function Hero() {
                 <span />
                 <span />
               </div>
-              <span className="gg-home-terminal-title">gg-cli / create-project</span>
+              <span className="gg-home-terminal-title">gz-cli / create-project</span>
               <span className="gg-home-terminal-status">● LIVE</span>
             </div>
 
             <div className="gg-home-terminal-body">
               <div className="gg-home-terminal-line gg-home-terminal-command">
                 <span className="gg-home-prompt">❯</span>
-                <span>gg-cli init customer-center</span>
+                <span>gz-cli init customer-center</span>
               </div>
 
               <div className="gg-home-terminal-gap" />
@@ -83,7 +83,7 @@ export default function Hero() {
               </div>
               <div className="gg-home-terminal-line">
                 <span className="gg-home-check">✓</span>
-                <span>gg-ui + gz-pc + Mock</span>
+                <span>gz-ui-web + gz-pc + Mock</span>
               </div>
               <div className="gg-home-terminal-line">
                 <span className="gg-home-check">✓</span>

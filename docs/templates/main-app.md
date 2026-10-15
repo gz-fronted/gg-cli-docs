@@ -18,7 +18,7 @@ main-app 是 Garfish 主应用模板，用于承载整体布局、注册和加�
 
 ## 基础技术
 
-当前模板以 React 19、TypeScript 5、Vite 8、React Router 7、Zustand 5、Garfish 和 gg-ui 为基础。
+当前模板以 React 19、TypeScript 5、Vite 8、React Router 7、Zustand 5、Garfish 和 gz-ui-web 为基础。
 
 ## 使用建议
 

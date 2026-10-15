@@ -19,20 +19,50 @@ toc: content
 
 ## 安装
 
-gg-cli 生成的项目已经包含所需依赖，通常不需要再次安装。仅在已有项目手动接入时执行：
+gz-cli 生成的项目已经包含所需依赖，通常不需要再次安装。仅在已有项目手动接入时执行：
 
 ```bash
-npm install @gz-fronted/gz-pc react @chenhui996/gg-ui
+npm install @gz-fronted/gz-pc react gz-ui-web@1.0.1
 ```
 
-React 和 gg-ui 是 peer dependencies；Axios 与 ahooks 随 gz-pc 安装。
+本次组件库使用 npm `latest` 稳定版 `gz-ui-web@1.0.1`。其 peer dependencies 要求
+Ant Design `6.3.3`、AG Grid React / Community / Enterprise `36.0.1`，升级时需同步核对。
+Axios 与 ahooks 随 gz-pc 安装。
+
+在应用入口导入一次组件库样式：
+
+```ts
+import 'gz-ui-web/gz-ui-web.css';
+```
+
+### gz-pc 0.1.x 兼容
+
+`gz-pc 0.1.x` 仍从 `@chenhui996/gg-ui` 导入反馈组件。业务代码统一导入 `gz-ui-web`，
+Vite 项目需要将旧入口指向同一份新组件库，避免 Provider 使用不同的主题上下文：
+
+```ts
+// vite.config.ts；合并到已有配置中
+resolve: {
+  alias: {
+    '@chenhui996/gg-ui': 'gz-ui-web',
+  },
+},
+// 使用 Vitest 时，让其转换 gz-pc 内部的旧入口
+test: {
+  server: {
+    deps: { inline: ['@gz-fronted/gz-pc'] },
+  },
+},
+```
+
+旧包名仅用于兼容既有 gz-pc，不用于新的业务组件导入。
 
 ## 本次请求能力更新
 
 本次 `0.1.1` 功能对应以下使用变化：
 
 - 可选的 HTTP 401 登录失效处理，库默认关闭，micro-app 模板显式开启。
-- 根节点 `GzFetchFeedbackProvider` 同时承载 gg-ui message 和 Modal，继承当前主题。
+- 根节点 `GzFetchFeedbackProvider` 同时承载 gz-ui-web message 和 Modal，继承当前主题。
 - 同一份 gz-pc 模块中的多个客户端共享 401 弹窗状态。
 - 支持单次请求 `withCredentials`、实例级 `validateStatus`，默认接受所有 HTTP `2xx`。
 
@@ -62,7 +92,7 @@ import { gzFetch } from '@gz-fronted/gz-pc';
 
 | 子路径 | 内容 | 是否依赖 React |
 | --- | --- | --- |
-| `/fetch` | 请求配置、默认实例、独立实例、错误、反馈 Provider 与中间件 | 反馈 Provider 依赖 React 和 gg-ui |
+| `/fetch` | 请求配置、默认实例、独立实例、错误、反馈 Provider 与中间件 | 反馈 Provider 依赖 React 和 gz-ui-web |
 | `/hooks` | 统一透传 ahooks 的公开 API | 是 |
 | `/utils` | 日期格式化、Query 转换 | 否 |
 

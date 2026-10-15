@@ -9,7 +9,7 @@ toc: content
 `micro-app` 模板使用 MSW 提供本地 Mock。业务代码仍然调用真实的接口函数，Mock 模式只改变响应来源。
 
 <div class="gz-callout">
-  <strong>先看项目内文档：</strong>gg-cli 生成的项目已经提供 <code>docs/agent-references/mock.md</code>，其中记录了当前模板准确的 Mock Key、响应配置、数据生成和模块注册方式。普通业务 Mock 以该文件为准。
+  <strong>先看项目内文档：</strong>gz-cli 生成的项目已经提供 <code>docs/agent-references/mock.md</code>，其中记录了当前模板准确的 Mock Key、响应配置、数据生成和模块注册方式。普通业务 Mock 以该文件为准。
 </div>
 
 ## 模板已经提供什么

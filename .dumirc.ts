@@ -1,4 +1,11 @@
 import { defineConfig } from 'dumi';
+import environments from './config/environments.json';
+
+const target = process.env.DOCS_TARGET ?? 'public';
+if (!Object.hasOwn(environments, target)) {
+  throw new Error(`不支持的文档构建环境：${target}`);
+}
+const environment = environments[target as keyof typeof environments];
 
 const rawBase = process.env.DOCS_BASE ?? '/';
 const base = rawBase === '/' ? '/' : `/${rawBase.replace(/^\/+|\/+$/g, '')}/`;
@@ -6,13 +13,13 @@ const origin = (process.env.DOCS_ORIGIN ?? '').replace(/\/$/, '');
 const socialImage = origin ? `${origin}${base}og.png` : `${base}og.png`;
 
 export default defineConfig({
-  title: 'gg-cli',
+  title: 'gz-cli',
   metas: [
     {
       name: 'description',
-      content: 'gg-cli 前端脚手架安装、使用与配套工具文档',
+      content: 'gz-cli 前端脚手架安装、使用与配套工具文档',
     },
-    { property: 'og:title', content: 'gg-cli' },
+    { property: 'og:title', content: 'gz-cli' },
     {
       property: 'og:description',
       content: '一条命令，创建符合团队约定的 React 项目',
@@ -24,13 +31,14 @@ export default defineConfig({
   ],
   base,
   publicPath: base,
-  outputPath: 'dist',
+  outputPath: environment.outputPath,
   hash: true,
   theme: {
     '@c-primary': '#2563eb',
   },
   themeConfig: {
-    name: 'gg-cli',
+    externalLinks: environment.externalLinks,
+    name: 'gz-cli',
     logo: false,
     prefersColor: {
       default: 'light',
@@ -43,12 +51,12 @@ export default defineConfig({
         title: '配套工具',
         children: [
           { title: 'gz-pc', link: '/gz-pc' },
-          { title: 'gg-ui', link: 'https://gz-ui-cyan.vercel.app' },
+          { title: 'gz-ui-web', link: environment.externalLinks.gzUiWeb },
         ],
       },
       { title: '常见问题', link: '/faq' },
       { title: '更新日志', link: '/changelog' },
     ],
-    footer: 'gg-cli · 前端项目脚手架',
+    footer: 'gz-cli · 前端项目脚手架',
   },
 });

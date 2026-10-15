@@ -2,13 +2,14 @@
   "name": "@gz-fronted/gg-cli-docs",
   "version": "0.1.0",
   "private": true,
-  "description": "gg-cli 脚手架使用文档",
-  "packageManager": "pnpm@11.9.0",
+  "description": "gz-cli 前端脚手架使用文档",
   "scripts": {
     "dev": "dumi dev",
     "start": "dumi dev",
-    "build": "dumi build",
-    "preview": "node scripts/preview.mjs"
+    "build": "node scripts/build.mjs public",
+    "preview": "node scripts/preview.mjs",
+    "build:internal": "node scripts/build.mjs internal",
+    "preview:internal": "node scripts/preview.mjs internal"
   },
   "engines": {
     "node": ">=22.19.0"

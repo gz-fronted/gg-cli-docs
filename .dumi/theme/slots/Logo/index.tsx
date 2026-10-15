@@ -9,7 +9,7 @@ export default function Logo() {
     <Link
       className="dumi-default-logo gg-brand-logo"
       to={'base' in locale ? locale.base : '/'}
-      aria-label="国智技术 gg-cli 文档首页"
+      aria-label="国智技术 gz-cli 文档首页"
     >
       <span className="gg-brand-logo-company" aria-hidden="true">
         <img src={guozhiLogo} alt="" />
