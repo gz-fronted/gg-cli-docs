@@ -6,6 +6,10 @@ toc: content
 
 # 更新日志
 
+## gz-cli-front 1.0.2 - 2026-10-16
+
+- `gz-cli-front` 新增 `gz-cli init --internal`（简写 `-i`），使用随 CLI 发布的微应用模板，无需访问 GitHub；依赖安装仍需可用的 npm 源。
+
 ## gg-cli-template-micro-app - 2026-10-15
 
 - 模板升级 `gz-pc@0.2` 和 `gz-ui-web`。

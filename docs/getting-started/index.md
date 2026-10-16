@@ -39,6 +39,15 @@ gz-cli init demo-app
 
 多数业务项目选择 `micro-app`。
 
+内网无法访问 GitHub 时，使用 `gz-cli-front@1.0.2` 或更高版本：
+
+```bash
+gz-cli init demo-app --internal
+```
+
+也可简写为 `-i`，直接使用随 CLI 发布的微应用模板。项目依赖仍需从可用的 npm 源安装；
+详见[内网初始化](/cli/commands#内网初始化)。
+
 ## 启动项目
 
 ```bash

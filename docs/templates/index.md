@@ -17,6 +17,17 @@ toc: content
   <strong>新人选择建议：</strong>如果你的需求是新增一个业务模块或一组业务页面，通常选择 micro-app。只有项目需要管理其他微应用时才选择 main-app。
 </div>
 
+## 内网模板
+
+从 `gz-cli-front@1.0.2` 起，可直接使用随 CLI 发布的微应用模板：
+
+```bash
+gz-cli init demo-app --internal
+```
+
+支持简写 `-i`，跳过远程模板列表和下载，不依赖本地缓存。当前只内置 `micro-app`，
+`main-app` 仍需通过普通远程模式获取。内置模板随 CLI 版本更新，项目依赖仍需从可用的 npm 源安装。
+
 ## 两种模板都遵循的基线
 
 - React 19 与 TypeScript 5。
