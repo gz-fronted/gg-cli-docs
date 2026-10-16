@@ -37,7 +37,7 @@ gz-cli init my-app
 指定包管理器：
 
 ```bash
-gz-cli init my-app --pm pnpm
+gz-cli init my-app --pm npm
 ```
 
 强制获取最新模板：
@@ -45,5 +45,13 @@ gz-cli init my-app --pm pnpm
 ```bash
 gz-cli init my-app --refresh
 ```
+
+内网无法访问 GitHub 时，使用内置微应用模板：
+
+```bash
+gz-cli init my-app --internal
+```
+
+支持简写 `-i`；模板随 CLI 版本更新，依赖安装仍需可用的 npm 源。
 
 更多参数见[命令行参数](/cli/commands)。网络或权限异常见[常见问题](/cli/troubleshooting)。

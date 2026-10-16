@@ -17,7 +17,16 @@ gz-cli --version
 
 ## 无法下载模板
 
-依次检查：
+内网无法访问 GitHub 时，先将 CLI 更新至 `1.0.2` 或更高版本，再使用内置微应用模板：
+
+```bash
+npm install -g gz-cli-front
+gz-cli init demo-app --internal
+```
+
+`--internal` 可简写为 `-i`，无需下载远程模板；依赖安装仍需可用的 npm 源。
+
+使用普通远程模式时，依次检查：
 
 1. 本机是否已安装 Git。
 2. 当前网络或代理能否访问注册仓库和模板仓库。
@@ -27,6 +36,11 @@ gz-cli --version
 不要把个人 Token 写进命令、项目文件或截图。
 
 ## 模板不是最新版本
+
+内网模式使用随 CLI 发布的模板快照，需要升级 `gz-cli-front` 后再创建项目；
+`--internal` 不能与 `--refresh` 同时使用。
+
+普通远程模式可以强制刷新：
 
 ```bash
 gz-cli init demo-app --refresh
